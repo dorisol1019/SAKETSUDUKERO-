@@ -1,14 +1,29 @@
 ﻿
 # include <Siv3D.hpp>
+# include <HamFramework.hpp>
+
+# include "MySceneMgr.h"
+# include "Title.h"
 
 void Main()
 {
-	const Font font(30);
 
+
+	Window::Resize(960, 540);
+
+	Window::SetTitle(L"避け続けろ！");
+
+	FontAsset::Register(L"font", 15);
+
+
+	MySceneMgr sceneMgr{};
+
+	// シーン追加処理
+	sceneMgr.add<Title>(L"Title");
+
+	//メインループ
 	while (System::Update())
 	{
-		font(L"ようこそ、Siv3D の世界へ！").draw();
-
-		Circle(Mouse::Pos(), 50).draw({ 255, 0, 0, 127 });
+		sceneMgr.updateAndDraw();
 	}
 }
