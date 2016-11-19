@@ -6,7 +6,7 @@
 
 Title::Title()
 {
-	Create<OpeningText>(L"2016 - @dorisol1019");
+	Create<OpeningText>(L"2016  @dorisol1019");
 }
 
 
@@ -23,4 +23,5 @@ void Title::update()
 
 void Title::draw() const
 {
+
 }

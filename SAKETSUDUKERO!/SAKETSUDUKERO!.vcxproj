@@ -279,6 +279,7 @@
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameMode.h" />
     <ClInclude Include="MySceneMgr.h" />
     <ClInclude Include="OpeningGraph.h" />
     <ClInclude Include="OpeningText.h" />

@@ -12,7 +12,6 @@ public:
 	void update()override;
 	void draw()const override;
 
-	Texture texture;
 
 };
 
