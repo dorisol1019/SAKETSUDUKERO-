@@ -50,5 +50,5 @@
 64607	FILE	"Engine/Fonts/mplus-1p-black.zip"
 
 // App Resource
-100		ICON	"Icon.ico"
+100		ICON	"Data/System/Icon.ico"
 101		FILE	"Engine/Splash.png"

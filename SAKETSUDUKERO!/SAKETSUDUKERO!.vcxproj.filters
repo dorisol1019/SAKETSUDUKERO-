@@ -97,9 +97,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Icon.ico">
-      <Filter>リソース ファイル</Filter>
-    </Image>
     <Image Include="Engine\Splash.png">
       <Filter>リソース ファイル\Engine</Filter>
     </Image>
@@ -126,6 +123,9 @@
     </Image>
     <Image Include="Example\Well\Well.jpg">
       <Filter>リソース ファイル\Example\Well</Filter>
+    </Image>
+    <Image Include="Data\System\icon.ico">
+      <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="TaskSystem\rnfs_TaskLink.h">
       <Filter>ヘッダー ファイル\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

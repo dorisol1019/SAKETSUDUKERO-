@@ -8,7 +8,6 @@
 void Main()
 {
 
-
 	Window::Resize(960, 540);
 
 	Window::SetTitle(L"避け続けろ！");

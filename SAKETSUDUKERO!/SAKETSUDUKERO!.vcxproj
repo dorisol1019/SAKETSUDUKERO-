@@ -170,6 +170,7 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Data\System\icon.ico" />
     <Image Include="Engine\Splash.png" />
     <Image Include="Example\Brick.jpg" />
     <Image Include="Example\Earth.jpg" />
@@ -179,7 +180,6 @@
     <Image Include="Example\Siv3D-kun.png" />
     <Image Include="Example\Well\Well.jpg" />
     <Image Include="Example\Windmill.png" />
-    <Image Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Assets\engine_textures.s3a" />
@@ -282,6 +282,7 @@
     <ClInclude Include="MySceneMgr.h" />
     <ClInclude Include="OpeningGraph.h" />
     <ClInclude Include="OpeningText.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TaskSystem\rnfs.h" />
     <ClInclude Include="TaskSystem\rnfs_Task.h" />
     <ClInclude Include="TaskSystem\rnfs_TaskCall.h" />
