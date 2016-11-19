@@ -3,15 +3,19 @@
 #include<Siv3D.hpp>
 #include"TaskSystem/rnfs.h"
 
-#include"TitleGraph.h"
+#include"Subject.h"
 
 class OpeningGraph :public Task
 {
 private:
 	TaskCall update;
 	Texture texture;
+
+	Subject*subject;
 public:
-	OpeningGraph(const FilePath&path) :update(this, &OpeningGraph::UpdateFadein), texture(path)
+	OpeningGraph(const FilePath&path, Subject*subject) :
+		update(this, &OpeningGraph::UpdateFadein), texture(path)
+		, subject(subject)
 	{
 	}
 
@@ -32,7 +36,7 @@ public:
 		if (t <= 0)
 		{
 			this->Destroy();
-			Create<TitleGraph>();
+			subject->onNotify(Event::createTitleGraph, subject);
 		}
 		texture.drawAt(Window::Center(), AlphaF((double)t-- / 120));
 	}

@@ -17,10 +17,10 @@ public:
 		s3d::Erase(observers, obs);
 	}
 
-	void onNotify() {
+	void onNotify(Event e,Subject*sub) {
 		for (auto& i : observers)
 		{
-			i->onNotify();
+			i->onNotify(e,sub);
 		}
 	}
 

@@ -3,12 +3,17 @@
 #include<Siv3D.hpp>
 #include"TaskSystem/rnfs.h"
 
+#include"Subject.h"
+
 class TitleText :public Task
 {
 private:
 	TaskCall update;
+
+	Subject*subject;
 public:
-	TitleText():update(this,&TitleText::Update)
+	TitleText(Subject*sub):update(this,&TitleText::Update)
+		,subject(sub)
 	{
 	}
 

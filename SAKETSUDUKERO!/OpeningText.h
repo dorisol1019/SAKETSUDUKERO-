@@ -3,15 +3,19 @@
 #include<Siv3D.hpp>
 #include"TaskSystem/rnfs.h"
 
-#include"OpeningGraph.h"
+#include"Subject.h"
+#include"Event.h"
 
 class OpeningText :public Task
 {
 private:
 	TaskCall update;
 	String text;
+
+	Subject*subject;
 public:
-	OpeningText(const String&text) :update(this, &OpeningText::UpdateFadein), text(text)
+	OpeningText(const String&text,Subject*subject) :update(this, &OpeningText::UpdateFadein), text(text)
+		,subject(subject)
 	{
 	}
 
@@ -35,7 +39,7 @@ public:
 		if (t <= 0)
 		{
 			this->Destroy();
-			Create<OpeningGraph>(L"Data/System/SRDG_Logo.png");
+			subject->onNotify(Event::createOpeningGraph,subject);
 		}
 		FontAsset(L"font").drawCenter(text, Window::Center(), AlphaF((double)t-- / 120));
 	}

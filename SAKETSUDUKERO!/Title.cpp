@@ -1,17 +1,19 @@
 #include "Title.h"
 #include"TaskSystem/rnfs.h"
 
-//#include"TitleGraph.h"
-#include"OpeningText.h"
+#include"Event.h"
 
 Title::Title()
 {
-	Create<OpeningText>(L"2016  @dorisol1019");
+	subject = std::make_unique<Subject>();
+	subject->addObserver(&createObject);
+	subject->onNotify(Event::createOpeningText, subject.get());
 }
 
 
 Title::~Title()
 {
+	subject->removeObserver(&createObject);
 	Task::All::Clear();
 }
 

@@ -1,6 +1,6 @@
 #include "TitleGraph.h"
 
-#include"TitleText.h"
+#include "Event.h"
 
 TitleGraph::~TitleGraph()
 {
@@ -18,7 +18,7 @@ void TitleGraph::Move()
 	{
 		pos.y = 110;
 		update.SetCall(&TitleGraph::Stopping);
-		Create<TitleText>();
+		subject->onNotify(Event::createTitleText,subject);
 	}
 	texture.drawAt(pos);
 
