@@ -281,9 +281,11 @@
   <ItemGroup>
     <ClInclude Include="GameMode.h" />
     <ClInclude Include="MySceneMgr.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="OpeningGraph.h" />
     <ClInclude Include="OpeningText.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="TaskSystem\rnfs.h" />
     <ClInclude Include="TaskSystem\rnfs_Task.h" />
     <ClInclude Include="TaskSystem\rnfs_TaskCall.h" />
