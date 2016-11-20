@@ -44,6 +44,7 @@ void TitleGraph::StopingHalfTime()
 
 void TitleGraph::SceleExclamation()
 {
+	static bool scaleEnd = false, moveEnd = false;
 	constexpr double scaleSpeed = 0.5;
 	constexpr int speed = 2;
 	pos.x -= speed;
@@ -52,14 +53,19 @@ void TitleGraph::SceleExclamation()
 	if (pos.x <= Window::Center().x - 40 || Input::AnyKeyClicked())
 	{
 		pos.x = Window::Center().x - 40;
-		if (scale <= 1.0 || Input::AnyKeyClicked())
-		{
-			scale = 1.0;
-			update.SetCall(&TitleGraph::Stopping);
-			subject->onNotify(Event::createTitleText, subject);
-		}
-
+		moveEnd = true;
 	}
+	if (scale <= 1.0 || Input::AnyKeyClicked())
+	{
+		scale = 1.0;
+		scaleEnd = true;
+	}
+	if (scaleEnd && moveEnd)
+	{
+		update.SetCall(&TitleGraph::Stopping);
+		subject->onNotify(Event::createTitleText, subject);
+	}
+
 }
 
 void TitleGraph::Draw()
