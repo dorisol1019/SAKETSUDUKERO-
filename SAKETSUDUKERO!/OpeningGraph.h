@@ -2,20 +2,26 @@
 
 #include<Siv3D.hpp>
 #include"TaskSystem/rnfs.h"
+#include"TaskCallGroup.h"
 
 #include"Subject.h"
 
 class OpeningGraph :public Task
 {
 private:
-	TaskCall update;
+	TaskCall update, draw;
 	Texture texture;
 
 	Subject*subject;
+
+	int frameCount = 0;
 public:
 	OpeningGraph(const FilePath&path, Subject*subject) :
-		update(this, &OpeningGraph::UpdateFadein), texture(path)
+		update(this, &OpeningGraph::UpdateFadein, TaskCallGroup::Update),
+		draw(this, &OpeningGraph::Draw, TaskCallGroup::Draw)
+		, texture(path)
 		, subject(subject)
+		, frameCount(0)
 	{
 	}
 
@@ -24,24 +30,24 @@ public:
 	}
 
 	void UpdateFadein() {
-		static int t = 0;
-		if (t >= 120)
+		if (frameCount >= 120)
 		{
 			update.SetCall(&OpeningGraph::UpdateFadeout);
+			frameCount = 120;
 		}
-		texture.drawAt(Window::Center(), AlphaF((double)t++ / 120));
+		frameCount++;
 	}
 	void UpdateFadeout() {
-		static int t = 120;
-		if (t <= 0)
+		if (frameCount <= 0)
 		{
 			this->Destroy();
 			subject->onNotify(Event::createTitleGraph, subject);
 		}
-		texture.drawAt(Window::Center(), AlphaF((double)t-- / 120));
+		frameCount--;
 	}
 
-
-private:
-
+	void Draw()
+	{
+		texture.drawAt(Window::Center(), AlphaF((double)frameCount / 120));
+	}
 };

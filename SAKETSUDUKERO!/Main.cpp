@@ -1,6 +1,7 @@
 ﻿
 # include <Siv3D.hpp>
 # include <HamFramework.hpp>
+# include "TaskSystem\rnfs.h"
 
 # include "MySceneMgr.h"
 # include "Title.h"
@@ -24,5 +25,7 @@ void Main()
 	while (System::Update())
 	{
 		sceneMgr.updateAndDraw();
+
+		Task::All::Update();
 	}
 }

@@ -2,6 +2,7 @@
 
 #include<Siv3D.hpp>
 #include"TaskSystem/rnfs.h"
+#include"TaskCallGroup.h"
 
 #include"Subject.h"
 #include"Event.h"
@@ -10,12 +11,17 @@ class OpeningText :public Task
 {
 private:
 	TaskCall update;
+	TaskCall draw;
 	String text;
 
 	Subject*subject;
+
+	int frameCount = 0;
 public:
-	OpeningText(const String&text,Subject*subject) :update(this, &OpeningText::UpdateFadein), text(text)
-		,subject(subject)
+	OpeningText(const String&text, Subject*subject) :
+		update(this, &OpeningText::UpdateFadein, TaskCallGroup::Update),
+		draw(this, &OpeningText::Draw, TaskCallGroup::Draw),
+		text(text), subject(subject), frameCount(0)
 	{
 	}
 
@@ -24,27 +30,24 @@ public:
 	}
 
 	void UpdateFadein() {
-
-		static const int countStart = System::FrameCount();
-		const int countNow = System::FrameCount();
-		const int t = (countNow - countStart);
-		if (t % (60 * 2) + 1 >= 60 * 2)
+		if (frameCount % (60 * 2) + 1 >= 60 * 2)
 		{
+			frameCount = 120;
 			update.SetCall(&OpeningText::UpdateFadeout);
 		}
-		FontAsset(L"font").drawCenter(text, Window::Center(), AlphaF((double)t / 120));
+		frameCount++;
 	}
 	void UpdateFadeout() {
-		static int t = 120;
-		if (t <= 0)
+		if (frameCount <= 0)
 		{
 			this->Destroy();
-			subject->onNotify(Event::createOpeningGraph,subject);
+			subject->onNotify(Event::createOpeningGraph, subject);
 		}
-		FontAsset(L"font").drawCenter(text, Window::Center(), AlphaF((double)t-- / 120));
+		frameCount--;
 	}
 
-
-private:
-
+	void Draw()
+	{
+		FontAsset(L"font").drawCenter(text, Window::Center(), AlphaF((double)frameCount / 120));
+	}
 };

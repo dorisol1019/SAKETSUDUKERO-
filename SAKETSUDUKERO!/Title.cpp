@@ -1,5 +1,6 @@
 #include "Title.h"
 #include"TaskSystem/rnfs.h"
+#include"TaskCallGroup.h"
 
 #include"Event.h"
 
@@ -19,11 +20,10 @@ Title::~Title()
 
 void Title::update()
 {
-	TaskCall::All::Update();
-	Task::All::Update();
+	TaskCall::All::Update(TaskCallGroup::Update);
 }
 
 void Title::draw() const
 {
-
+	TaskCall::All::Update(TaskCallGroup::Draw);
 }

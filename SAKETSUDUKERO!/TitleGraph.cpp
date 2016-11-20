@@ -7,9 +7,7 @@ TitleGraph::~TitleGraph()
 }
 
 void TitleGraph::Stopping()
-{
-	texture.drawAt(pos);
-}
+{}
 
 void TitleGraph::Move()
 {
@@ -20,24 +18,20 @@ void TitleGraph::Move()
 		update.SetCall(&TitleGraph::Stopping);
 		subject->onNotify(Event::createTitleText,subject);
 	}
-	texture.drawAt(pos);
 
 }
 
 void TitleGraph::Appear()
 {
-	static const int countStart = System::FrameCount();
-	const int countNow = System::FrameCount();
-	const int t = (countNow - countStart);
-	if (Input::AnyKeyClicked() || t % (60 * 2) + 1 >= 60 * 2)
+	if (Input::AnyKeyClicked() || frameCount % (60 * 2) + 1 >= 60 * 2)
 	{
 		update.SetCall(&TitleGraph::Move);
+		frameCount = 120;
 	}
-
-	texture.drawAt(pos, AlphaF((double)(t) / (2 * 60)));
+	frameCount++;
 }
 
 void TitleGraph::Draw()
 {
-
+	texture.drawAt(pos, AlphaF((double)(frameCount) / (2 * 60)));
 }
